@@ -157,20 +157,20 @@ fn serialize_to_form_params_safe<T: Serialize>(data: &T) -> HashMap<String, Stri
 fn serialize_to_header_map_safe<T: Serialize>(headers: &T) -> HeaderMap {
     let mut header_map = HeaderMap::new();
 
-    if let Ok(value) = serde_json::to_value(headers)
-        && let Some(obj) = value.as_object()
-    {
-        for (key, val) in obj {
-            if let Some(val_str) = val.as_str()
-                && let (Ok(header_name), Ok(header_value)) = (
-                    http::HeaderName::from_bytes(key.as_bytes()),
-                    http::HeaderValue::from_str(val_str),
-                )
-            {
-                header_map.insert(header_name, header_value);
+    if let Ok(value) = serde_json::to_value(headers) {
+        if let Some(obj) = value.as_object() {
+            for (key, val) in obj {
+                if let Some(val_str) = val.as_str() {
+                    if let (Ok(header_name), Ok(header_value)) = (
+                        http::HeaderName::from_bytes(key.as_bytes()),
+                        http::HeaderValue::from_str(val_str),
+                    ) {
+                        header_map.insert(header_name, header_value);
+                    }
+                    // Note: Invalid headers are silently skipped for backward compatibility
+                    // In a future version, we should logging these errors
+                }
             }
-            // Note: Invalid headers are silently skipped for backward compatibility
-            // In a future version, we should logging these errors
         }
     }
 
