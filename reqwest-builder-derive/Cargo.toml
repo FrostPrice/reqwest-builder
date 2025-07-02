@@ -5,6 +5,7 @@ edition = "2024"
 authors = ["Mateus Barbosa <barbosamat16@gmail.com>"]
 description = "Derive macros for reqwest-builder"
 license = "MIT"
+repository = "https://github.com/FrostPrice/reqwest-builder/tree/main/reqwest-builder-derive"
 
 [lib]
 proc-macro = true
