@@ -25,7 +25,7 @@ serde_json = "1.0.140"
 url = "2.5.4"
 
 # Derive macro support
-reqwest-builder-derive = { path = "./reqwest-builder-derive", optional = true }
+reqwest-builder-derive = { version = "*", path = "./reqwest-builder-derive", optional = true }
 
 [dev-dependencies]
 tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
