@@ -10,6 +10,11 @@ license = "MIT"
 keywords = ["reqwest", "http", "builder"]
 categories = ["web-programming::http-client", "network-programming"]
 
+[features]
+default = []
+full = ["derive"]
+derive = ["reqwest-builder-derive"]
+
 [dependencies]
 http = "1.3.1"
 mime_guess = "2.0.5"
@@ -18,3 +23,19 @@ reqwest-middleware = { version = "0.4.2", features = ["json", "multipart"] }
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
 url = "2.5.4"
+
+# Derive macro support
+reqwest-builder-derive = { version = "0.1.0", path = "./reqwest-builder-derive", optional = true }
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+
+[[example]]
+name = "simple_derive_test"
+path = "examples/simple_derive_test.rs"
+required-features = ["derive"]
+
+[[example]]
+name = "derive_demo"
+path = "examples/derive_demo.rs"
+required-features = ["derive"]
