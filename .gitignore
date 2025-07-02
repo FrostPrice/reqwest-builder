@@ -4,7 +4,10 @@
 # For any subdirectory
 */target/ 
 ## Cargo lock file for lib crates
+## For the root directory
 /Cargo.lock
+# For any subdirectory
+*/Cargo.lock
 
 # IDE files
 .vscode/
