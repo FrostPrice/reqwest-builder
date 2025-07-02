@@ -1,0 +1,15 @@
+[package]
+name = "reqwest-builder-derive"
+version = "0.1.0"
+edition = "2024"
+authors = ["Mateus Barbosa <barbosamat16@gmail.com>"]
+description = "Derive macros for reqwest-builder"
+license = "MIT"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "2.0", features = ["full"] }

@@ -164,3 +164,109 @@ where
         Ok(builder)
     }
 }
+
+// Helper function for the derive macro to handle query parameters
+// This works with both Option and non-Option types
+pub fn query_param_helper<T>(
+    value: &T,
+    param_name: &str,
+    params: &mut std::collections::HashMap<String, String>,
+) where
+    T: QueryParamValue,
+{
+    value.add_to_params(param_name, params);
+}
+
+// Trait to handle different types of query parameter values
+pub trait QueryParamValue {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    );
+}
+
+// Implementation for Option types
+impl<T: std::fmt::Display> QueryParamValue for Option<T> {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        if let Some(value) = self {
+            params.insert(param_name.to_string(), value.to_string());
+        }
+    }
+}
+
+// Implementations for common non-Option types
+/// TODO: We should use a better aproach to handle these types
+impl QueryParamValue for String {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.clone());
+    }
+}
+
+impl QueryParamValue for &str {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.to_string());
+    }
+}
+
+impl QueryParamValue for u32 {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.to_string());
+    }
+}
+
+impl QueryParamValue for u64 {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.to_string());
+    }
+}
+
+impl QueryParamValue for i32 {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.to_string());
+    }
+}
+
+impl QueryParamValue for i64 {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.to_string());
+    }
+}
+
+impl QueryParamValue for bool {
+    fn add_to_params(
+        &self,
+        param_name: &str,
+        params: &mut std::collections::HashMap<String, String>,
+    ) {
+        params.insert(param_name.to_string(), self.to_string());
+    }
+}

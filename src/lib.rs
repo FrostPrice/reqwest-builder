@@ -46,7 +46,7 @@ pub mod types;
 
 // Feature-gated modules
 #[cfg(feature = "derive")]
-pub mod derive;
+pub use reqwest_builder_derive::*;
 
 // Tests module
 #[cfg(test)]
@@ -55,7 +55,7 @@ mod tests;
 // Re-exports for convenience
 pub use errors::ReqwestBuilderError;
 pub use file_upload::FileUpload;
-pub use trait_impl::IntoReqwestBuilder;
+pub use trait_impl::{IntoReqwestBuilder, QueryParamValue, query_param_helper};
 pub use types::{QueryParams, RequestBody};
 
 // Re-export serialization functions for advanced users
