@@ -1,5 +1,8 @@
 # Rust
+## For the root directory
 /target/
+# For any subdirectory
+*/target/ 
 ## Cargo lock file for lib crates
 /Cargo.lock
 
