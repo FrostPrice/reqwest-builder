@@ -1,6 +1,6 @@
 [package]
 name = "reqwest-builder"
-version = "0.2.1"
+version = "0.2.3"
 edition = "2024"
 authors = ["Mateus Barbosa <barbosamat16@gmail.com>"]
 description = "A builder for reqwest requests with support for custom headers, query parameters, and body content."
@@ -13,7 +13,7 @@ categories = ["web-programming::http-client", "network-programming"]
 [features]
 default = []
 full = ["derive"]
-derive = ["reqwest-builder-derive"]
+derive = ["dep:reqwest-builder-derive"]
 
 [dependencies]
 http = "1.3.1"
