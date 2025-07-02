@@ -1,4 +1,4 @@
-use crate::{IntoReqwestBuilder, RequestBody};
+use reqwest_builder::{IntoReqwestBuilder, RequestBody};
 use serde::Serialize;
 use url::Url;
 
@@ -147,13 +147,13 @@ fn test_optional_query_params() {
 }
 
 #[test]
-fn test_try_into_reqwest_builder() {
+fn test_into_reqwest_builder() {
     let client = reqwest_middleware::ClientBuilder::new(reqwest::Client::new()).build();
     let base_url = Url::parse("https://api.example.com").unwrap();
 
     let request = SimpleTestRequest { page: Some(1) };
 
     // This should not panic and should return a valid builder
-    let builder_result = request.try_into_reqwest_builder(&client, &base_url);
+    let builder_result = request.into_reqwest_builder(&client, &base_url);
     assert!(builder_result.is_ok());
 }
