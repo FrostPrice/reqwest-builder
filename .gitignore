@@ -1,1 +1,11 @@
+# Rust
 /target
+## Cargo lock file for lib crates
+Cargo.lock
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
