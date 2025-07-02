@@ -55,7 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         include_posts: Some(true),
     };
 
-    let builder = request.try_into_reqwest_builder(&client, &base_url)?;
+    let builder = request.into_reqwest_builder(&client, &base_url)?;
     let response = builder.send().await?;
 
     println!("Status: {}", response.status());
@@ -289,11 +289,11 @@ The derive macro works with various Rust types:
 
 ## Error Handling
 
-The generated implementation works with both error handling approaches provided by `reqwest-builder`:
+The generated implementation works with error handling approach provided by `reqwest-builder`:
 
 ```rust
-// Explicit error handling (recommended)
-match request.try_into_reqwest_builder(&client, &base_url) {
+// Explicit error handling
+match request.into_reqwest_builder(&client, &base_url) {
     Ok(builder) => {
         let response = builder.send().await?;
         // Handle response
@@ -302,9 +302,6 @@ match request.try_into_reqwest_builder(&client, &base_url) {
         eprintln!("Request building failed: {}", e);
     }
 }
-
-// Backward compatible (silent failures)
-let builder = request.into_reqwest_builder(&client, &base_url);
 ```
 
 ## Generated Code

@@ -43,7 +43,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Body type: {:?}", request.body());
 
     // Try to build the request
-    match request.try_into_reqwest_builder(&client, &base_url) {
+    match request.into_reqwest_builder(&client, &base_url) {
         Ok(_builder) => {
             println!("Request builder created successfully!");
         }

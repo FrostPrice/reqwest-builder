@@ -4,35 +4,25 @@ A builder for reqwest requests with support for custom headers, query parameters
 
 ## Features
 
-- ✅ **Builder Pattern**: Trait-based approach for converting request structures into reqwest builders
-- ✅ **Derive Macro**: Automatic implementation generation with `reqwest-builder-derive` crate
-- ✅ **Multiple Body Types**: Support for JSON, form-encoded, multipart, and no-body requests
-- ✅ **Error Handling**: Comprehensive error handling with detailed error messages
-- ✅ **File Uploads**: Built-in support for file uploads with MIME type detection
-- ✅ **Header Management**: Safe header serialization with proper error reporting
-- ✅ **Backward Compatibility**: Maintains compatibility with existing code
-- ✅ **Modular Architecture**: Clean separation of concerns with well-organized modules
+- **Builder Pattern**: Trait-based approach for converting request structures into reqwest builders
+- **Derive Macro**: Automatic implementation generation with `reqwest-builder-derive` crate
+- **Multiple Body Types**: Support for JSON, form-encoded, multipart, and no-body requests
+- **Error Handling**: Comprehensive error handling with detailed error messages
+- **File Uploads**: Built-in support for file uploads with MIME type detection
+- **Header Management**: Safe header serialization with proper error reporting
+- **Modular Architecture**: Clean separation of concerns with well-organized modules
 
 ## Error Handling
 
-The library provides two approaches for error handling:
+The library provides custom error types for error handling:
 
-### 1. Backward Compatible (Silent Failures)
-
-```rust
-use reqwest_builder::{IntoReqwestBuilder, RequestBody};
-
-// This method silently skips invalid headers/data
-let builder = request.into_reqwest_builder(&client, &base_url);
-```
-
-### 2. Explicit Error Handling (Recommended)
+### Explicit Error Handling
 
 ```rust
 use reqwest_builder::{IntoReqwestBuilder, ReqwestBuilderError};
 
 // This method returns detailed errors
-match request.try_into_reqwest_builder(&client, &base_url) {
+match request.into_reqwest_builder(&client, &base_url) {
     Ok(builder) => {
         // Use the builder
     }
@@ -108,7 +98,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         content: "Post content here".to_string(),
     };
 
-    let builder = request.try_into_reqwest_builder(&client, &base_url)?;
+    let builder = request.into_reqwest_builder(&client, &base_url)?;
     let response = builder.send().await?;
 
     println!("Status: {}", response.status());
@@ -173,8 +163,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         email: "john@example.com".to_string(),
     };
 
-    // Use the new error-handling method
-    let builder = request.try_into_reqwest_builder(&client, &base_url)?;
+    // Use the manual implementation
+    let builder = request.into_reqwest_builder(&client, &base_url)?;
     let response = builder.send().await?;
 
     println!("Status: {}", response.status());

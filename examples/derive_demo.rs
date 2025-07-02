@@ -75,7 +75,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         response_format: Some("json".to_string()),
     };
 
-    let builder = get_user.try_into_reqwest_builder(&client, &base_url)?;
+    let builder = get_user.into_reqwest_builder(&client, &base_url)?;
     println!("   URL: {}", builder.try_clone().unwrap().build()?.url());
     println!(
         "   Method: {:?}",
@@ -94,7 +94,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         tags: vec!["rust".to_string(), "programming".to_string()],
     };
 
-    let builder = create_post.try_into_reqwest_builder(&client, &base_url)?;
+    let builder = create_post.into_reqwest_builder(&client, &base_url)?;
     println!("   URL: {}", builder.try_clone().unwrap().build()?.url());
     println!(
         "   Method: {:?}",
@@ -113,7 +113,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         password: "secret123".to_string(),
     };
 
-    let builder = login.try_into_reqwest_builder(&client, &base_url)?;
+    let builder = login.into_reqwest_builder(&client, &base_url)?;
     println!("   URL: {}", builder.try_clone().unwrap().build()?.url());
     println!(
         "   Method: {:?}",
@@ -127,7 +127,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         auth_token: "Bearer xyz789".to_string(),
     };
 
-    let builder = delete_post.try_into_reqwest_builder(&client, &base_url)?;
+    let builder = delete_post.into_reqwest_builder(&client, &base_url)?;
     println!("   URL: {}", builder.try_clone().unwrap().build()?.url());
     println!(
         "   Method: {:?}",

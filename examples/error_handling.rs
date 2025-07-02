@@ -45,14 +45,9 @@ fn main() {
     let client = reqwest_middleware::ClientBuilder::new(reqwest::Client::new()).build();
     let base_url = Url::parse("https://api.example.com").unwrap();
 
-    // Using the old method (silent failure for headers)
-    println!("=== Using backward-compatible method ===");
-    let _builder = request.clone().into_reqwest_builder(&client, &base_url);
-    println!("Builder created successfully (headers with errors are silently skipped)");
-
-    // Using the new error-handling method
+    // Using error-handling method
     println!("\n=== Using error-handling method ===");
-    match request.try_into_reqwest_builder(&client, &base_url) {
+    match request.into_reqwest_builder(&client, &base_url) {
         Ok(_builder) => {
             println!("Builder created successfully");
         }

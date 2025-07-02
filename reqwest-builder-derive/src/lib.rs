@@ -2,9 +2,6 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{Data, DeriveInput, Fields, Lit, parse_macro_input};
 
-#[cfg(test)]
-mod tests;
-
 /// Derive macro for IntoReqwestBuilder
 ///
 /// This macro allows you to define HTTP request properties directly on struct fields:

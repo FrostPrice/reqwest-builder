@@ -3,28 +3,6 @@ use http::HeaderMap;
 use serde::Serialize;
 use std::collections::HashMap;
 
-/// Convert a serializable type to form parameters with improved error handling
-pub fn serialize_to_form_params_safe<T: Serialize>(data: &T) -> HashMap<String, String> {
-    serde_json::to_value(data)
-        .ok()
-        .and_then(|v| v.as_object().cloned())
-        .map(|obj| {
-            obj.iter()
-                .filter_map(|(key, val)| {
-                    let value_str = match val {
-                        serde_json::Value::String(s) => s.clone(),
-                        serde_json::Value::Number(n) => n.to_string(),
-                        serde_json::Value::Bool(b) => b.to_string(),
-                        serde_json::Value::Null => return None, // Skip null values
-                        _ => val.to_string(), // Arrays and objects as JSON strings
-                    };
-                    Some((key.clone(), value_str))
-                })
-                .collect()
-        })
-        .unwrap_or_default()
-}
-
 /// Convert a serializable type to form parameters with proper error handling
 pub fn serialize_to_form_params<T: Serialize>(
     data: &T,
@@ -48,29 +26,6 @@ pub fn serialize_to_form_params<T: Serialize>(
     }
 
     Ok(params)
-}
-
-/// Convert serializable headers to HeaderMap with improved error handling
-pub fn serialize_to_header_map_safe<T: Serialize>(headers: &T) -> HeaderMap {
-    let mut header_map = HeaderMap::new();
-
-    if let Ok(value) = serde_json::to_value(headers) {
-        if let Some(obj) = value.as_object() {
-            for (key, val) in obj {
-                if let Some(val_str) = val.as_str() {
-                    if let (Ok(header_name), Ok(header_value)) = (
-                        http::HeaderName::from_bytes(key.as_bytes()),
-                        http::HeaderValue::from_str(val_str),
-                    ) {
-                        header_map.insert(header_name, header_value);
-                    }
-                    // Note: Invalid headers are silently skipped
-                }
-            }
-        }
-    }
-
-    header_map
 }
 
 /// Convert serializable headers to HeaderMap with proper error handling
@@ -118,7 +73,7 @@ pub fn serialize_to_header_map<T: Serialize>(
 }
 
 /// Construct a URL by combining base URL and endpoint
-pub fn construct_url_safe(base_url: &url::Url, endpoint: &str) -> String {
+pub fn construct_url(base_url: &url::Url, endpoint: &str) -> String {
     let base_str = base_url.as_str().trim_end_matches('/');
     let endpoint_str = endpoint.trim_start_matches('/');
 

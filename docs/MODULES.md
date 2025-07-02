@@ -42,12 +42,12 @@ src/
 - `IntoReqwestBuilder` trait definition
 - Default trait implementations
 - Request building logic
-- Both safe and error-handling methods
+- Both safe and with error-handling method
 
 ### `serialization.rs` - Serialization Utilities
 
-- Form parameter serialization (safe and error-handling versions)
-- Header map serialization (safe and error-handling versions)
+- Form parameter serialization (safe and with error-handling)
+- Header map serialization (safe and with error-handling)
 - URL construction utilities
 - All JSON/serde-related helper functions
 
@@ -103,7 +103,7 @@ use reqwest_builder::{IntoReqwestBuilder, RequestBody, ReqwestBuilderError, File
 use reqwest_builder::{
     IntoReqwestBuilder,
     serialize_to_header_map,
-    construct_url_safe
+    construct_url
 };
 ```
 

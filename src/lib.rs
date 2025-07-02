@@ -10,7 +10,6 @@
 //! - **Error Handling**: Comprehensive error handling with detailed error messages
 //! - **File Uploads**: Built-in support for file uploads with MIME type detection
 //! - **Header Management**: Safe header serialization with proper error reporting
-//! - **Backward Compatibility**: Maintains compatibility with existing code
 //!
 //! ## Quick Start
 //!
@@ -48,10 +47,6 @@ pub mod types;
 #[cfg(feature = "derive")]
 pub use reqwest_builder_derive::*;
 
-// Tests module
-#[cfg(test)]
-mod tests;
-
 // Re-exports for convenience
 pub use errors::ReqwestBuilderError;
 pub use file_upload::FileUpload;
@@ -59,7 +54,4 @@ pub use trait_impl::{IntoReqwestBuilder, QueryParamValue, query_param_helper};
 pub use types::{QueryParams, RequestBody};
 
 // Re-export serialization functions for advanced users
-pub use serialization::{
-    construct_url_safe, serialize_to_form_params, serialize_to_form_params_safe,
-    serialize_to_header_map, serialize_to_header_map_safe,
-};
+pub use serialization::{construct_url, serialize_to_form_params, serialize_to_header_map};
