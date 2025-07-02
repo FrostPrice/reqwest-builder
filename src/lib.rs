@@ -167,8 +167,8 @@ fn serialize_to_header_map_safe<T: Serialize>(headers: &T) -> HeaderMap {
                     ) {
                         header_map.insert(header_name, header_value);
                     }
-                    // Note: Invalid headers are silently skipped for backward compatibility
-                    // In a future version, we should logging these errors
+                    // Note: Invalid headers are silently skipped
+                    // TODO: Maybe we return a an custom error here
                 }
             }
         }
