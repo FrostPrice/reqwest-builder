@@ -81,9 +81,9 @@ fn main() {
 
     // Show the modular structure benefits
     println!("\n=== Modular Structure Benefits ===");
-    println!("✅ Clean separation of concerns");
-    println!("✅ Easy to test individual components");
-    println!("✅ Better maintainability");
-    println!("✅ Cleaner imports for users");
-    println!("✅ Reduced coupling between components");
+    println!("Clean separation of concerns");
+    println!("Easy to test individual components");
+    println!("Better maintainability");
+    println!("Cleaner imports for users");
+    println!("Reduced coupling between components");
 }
