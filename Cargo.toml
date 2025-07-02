@@ -2,6 +2,12 @@
 name = "reqwest-builder"
 version = "0.1.0"
 edition = "2024"
+description = "A builder for reqwest requests with support for custom headers, query parameters, and body content."
+readme = "README.md"
+repository = "https://github.com/FrostPrice/reqwest-builder"
+license = "MIT"
+keywords = ["reqwest", "http", "builder"]
+categories = ["web-programming::http-client", "network-programming"]
 
 [dependencies]
 http = "1.3.1"
