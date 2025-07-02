@@ -1,6 +1,6 @@
 [package]
 name = "reqwest-builder"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 authors = ["Mateus Barbosa <barbosamat16@gmail.com>"]
 description = "A builder for reqwest requests with support for custom headers, query parameters, and body content."
